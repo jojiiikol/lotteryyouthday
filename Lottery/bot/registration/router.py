@@ -18,14 +18,14 @@ async def start_command(message: Message, repository = UserRepository()):
         await message.answer(text="Вы уже прошли этап регистрации")
     else:
         await message.answer(
-            text=f"Привет {message.from_user.username}!\n\nЧтобы участвовать в розыгрыше убедись, что ты подписан на наш канал: https://t.me/testBotDMNV2025 ☺️",
+            text=f"Привет {message.from_user.username}!\n\nЧтобы участвовать в розыгрыше убедись, что ты подписан на наш канал: https://t.me/molodnv ☺️",
             reply_markup=get_check_subscribe_keyboard())
 
 
 @router.callback_query(F.data == "check_subscribe")
 async def check_subscribe(callback: CallbackQuery, bot: Bot, state: FSMContext):
     await callback.answer()
-    member = await bot.get_chat_member("-1002734352735", callback.from_user.id)
+    member = await bot.get_chat_member("-1001858677023", callback.from_user.id)
     if member.status == 'left':
         await callback.answer(
             "К сожалению вы не подписались на указанные каналы. Подпишитесь и попробуйте еще раз",
