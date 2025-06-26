@@ -1,1 +1,1 @@
-GLOBAL_URL = 'http://localhost:80'
+GLOBAL_URL = 'http://158.255.0.77:80'
