@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Розыгрыш-слот</title>
+  <link rel="stylesheet" href="front/style.css">
+  <style>
+    .header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 1rem;
+      z-index: 1000;
+    }
+    
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ddd;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+  </style>
+</head>
+<body>
+<!--  <div class="header">-->
+<!--    <button class="logout-btn" onclick="logout()">Выйти</button>-->
+<!--  </div>-->
+  
+  <div class="number-roulette" id="numberRoulette">0</div>
+  <button id="startBtn">Запустить</button>
+
+  <!-- Модальное окно -->
+  <div id="winnerModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2 id="winnerText">Победитель!</h2>
+      <p id="winnerInfo"></p>
+    </div>
+  </div>
+
+  <!-- Конфетти -->
+  <canvas id="confetti"></canvas>
+
+  <script src="front/global_url.js"></script>
+  <script src="front/script.js"></script>
+  <script>
+    // Проверка авторизации при загрузке страницы
+    window.addEventListener('load', () => {
+      const token = sessionStorage.getItem('auth_token');
+      if (!token) {
+        window.location.href = '/front/login.html';
+      }
+    });
+
+    function logout() {
+      sessionStorage.removeItem('auth_token');
+      window.location.href = '/front/login.html';
+    }
+  </script>
+</body>
+</html> 

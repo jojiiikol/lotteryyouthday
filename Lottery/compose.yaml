@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres
+    hostname: db_lottery
+    env_file:
+      - .env
+    restart: on-failure
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5431:5432"
+  lottery_bot:
+    build:
+      context: ./bot
+    command: bash -c "alembic upgrade head && python main.py"
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    restart: always
+  web:
+    build:
+      context: ./web
+    hostname: web
+    ports:
+      - "80:80"
+    depends_on:
+      - lottery_bot
+    env_file:
+      - .env
+    volumes:
+      - ./web/front:/app/web/front
+    restart: always
+
+volumes:
+  postgres_data:
