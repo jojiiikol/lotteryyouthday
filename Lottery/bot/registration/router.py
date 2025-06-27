@@ -73,3 +73,10 @@ async def set_sex(callback: CallbackQuery, state: FSMContext, repository = UserR
     await callback.message.answer(f"Спасибо за регистрацию!\nВаш уникальный номер в розыгрыше: <b>{user.id}</b>!")
     await callback.message.answer(f"Ждем вас у сцены в момент розыгрыша. В случае выигрыша я уведомлю вас ️☺️")
 
+
+@router.message(Command("count"))
+async def count_users(message: Message, repository = UserRepository()):
+    users = await repository.get_all()
+    count = len(users)
+    await message.answer(f"Зарегистрировано {count} человек")
+
