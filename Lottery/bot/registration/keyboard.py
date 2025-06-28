@@ -1,5 +1,5 @@
-from aiogram.types import InlineKeyboardButton
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import InlineKeyboardButton, KeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
 
 def get_check_subscribe_keyboard():
@@ -17,3 +17,10 @@ def get_sex_keyboard():
     )
     return keyboard.adjust(2).as_markup()
 
+
+def lottery_keyboard():
+    keyboard = ReplyKeyboardBuilder()
+    keyboard.add(
+        KeyboardButton(text="Выявить победителя")
+    )
+    return keyboard.as_markup(resize_keyboard=True)
